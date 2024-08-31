@@ -80,6 +80,7 @@
         function Servomotor_1_actualizarEstado() {
             const estadoLedInput = document.getElementById("Servomotor_1_Estado_Led_1_Input");
             estadoLedInput.value = Servomotor_1_Led_1_Status ? "On" : "Off";
+            
 
             const Estado_Led_2_Input = document.getElementById("Servomotor_1_Estado_Led_2_Input");
             Estado_Led_2_Input.value = Servomotor_1_Led_2_Status ? "On" : "Off";
@@ -93,6 +94,7 @@
             Servomotor_1_Led_1_Status = true;
             Servomotor_1_Led_2_Status = false;
             Servomotor_1_Led_3_Status = false;
+            fetch('/?Servomotor_1_Led_1_Status=true');
             Servomotor_1_actualizarEstado();
            // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
         }
@@ -102,6 +104,7 @@
             Servomotor_1_Led_1_Status = false;
             Servomotor_1_Led_2_Status = true;
             Servomotor_1_Led_3_Status = false;
+            fetch('/?Servomotor_1_Led_2_Status=true');
             Servomotor_1_actualizarEstado();
            // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
         }
