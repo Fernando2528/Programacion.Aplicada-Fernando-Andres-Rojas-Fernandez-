@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Control Remoto De Servomotores</title>
+    <meta charset="UTF-8">
+
+    <style>
+        .marco {
+            border: 2px solid black; /* Línea de borde */
+            padding: 20px; /* Espacio interno */
+            width: 300px; /* Ancho del marco */
+            margin: 20px auto; /* Centra el marco en la página */
+        }
+
+        .contenedor {
+            display: flex; /* Usar Flexbox para colocar los elementos uno al lado del otro */
+            justify-content: space-around; /* Espacio entre los contenedores */
+        }
+
+       
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+        
+        <div class="marco">
+            <p>Control Remoto Servomotor 1.</p>
+            <input type="button" value="Mover a 0 grados" onclick="Servomotor_1_Change_Led_1_Status_To_True()" style="display: block; margin-bottom: 10px;">
+            <input type="button" value="Mover a 90 grados" onclick="Servomotor_1_Change_Led_2_Status_To_True()" style="display: block; margin-bottom: 10px;">
+            <input type="button" value="Apagar a 180" onclick="Servomotor_1_Change_Led_3_Status_To_True()" style="display: block; margin-bottom: 10px;">
+            <p>Estado Led Uno (0 grados):</p>
+            <input type="text" id="Servomotor_1_Estado_Led_1_Input" readonly>
+            <p>Estado Led Dos (90 grados):</p>
+            <input type="text" id="Servomotor_1_Estado_Led_2_Input" readonly>
+            <p>Estado Led Tres (180 grados):</p>
+            <input type="text" id="Servomotor_1_Estado_Led_3_Input" readonly>
+        </div>
+        
+        
+        <div class="marco">
+            <p>Control Remoto Servomotor 2.</p>
+            <input type="button" value="Mover a 0 grados" onclick="Servomotor_2_Change_Led_1_Status_To_True()" style="display: block; margin-bottom: 10px;">
+            <input type="button" value="Mover a 90 grados" onclick="Servomotor_2_Change_Led_2_Status_To_True()" style="display: block; margin-bottom: 10px;">
+            <input type="button" value="Apagar a 180" onclick="Servomotor_2_Change_Led_3_Status_To_True()" style="display: block; margin-bottom: 10px;">
+            <p>Estado Led Uno (0 grados):</p>
+            <input type="text" id="Servomotor_2_Estado_Led_1_Input" readonly>
+            <p>Estado Led Dos (90 grados):</p>
+            <input type="text" id="Servomotor_2_Estado_Led_2_Input" readonly>
+            <p>Estado Led Tres (180 grados):</p>
+            <input type="text" id="Servomotor_2_Estado_Led_3_Input" readonly>
+        </div>
+
+        
+        <div class="marco">
+            <p>Control Remoto Servomotor 3.</p>
+            <input type="button" value="Mover a 0 grados" onclick="Servomotor_3_Change_Led_1_Status_To_True()" style="display: block; margin-bottom: 10px;">
+            <input type="button" value="Mover a 90 grados" onclick="Servomotor_3_Change_Led_2_Status_To_True()" style="display: block; margin-bottom: 10px;">
+            <input type="button" value="Apagar a 180" onclick="Servomotor_3_Change_Led_3_Status_To_True()" style="display: block; margin-bottom: 10px;">
+            <p>Estado Led Uno (0 grados):</p>
+            <input type="text" id="Servomotor_3_Estado_Led_1_Input" readonly>
+            <p>Estado Led Dos (90 grados):</p>
+            <input type="text" id="Servomotor_3_Estado_Led_2_Input" readonly>
+            <p>Estado Led Tres (180 grados):</p>
+            <input type="text" id="Servomotor_3_Estado_Led_3_Input" readonly>
+        </div>
+    </div>
+
+    <script>
+
+        // Logica Servomotor 1
+
+        let Servomotor_1_Led_1_Status = false;
+        let Servomotor_1_Led_2_Status = false;
+        let Servomotor_1_Led_3_Status = false;
+
+        // Función para actualizar el valor del campo de texto
+        function Servomotor_1_actualizarEstado() {
+            const estadoLedInput = document.getElementById("Servomotor_1_Estado_Led_1_Input");
+            estadoLedInput.value = Servomotor_1_Led_1_Status ? "On" : "Off";
+
+            const Estado_Led_2_Input = document.getElementById("Servomotor_1_Estado_Led_2_Input");
+            Estado_Led_2_Input.value = Servomotor_1_Led_2_Status ? "On" : "Off";
+
+            const Estado_Led_3_Input = document.getElementById("Servomotor_1_Estado_Led_3_Input");
+            Estado_Led_3_Input.value = Servomotor_1_Led_3_Status ? "On" : "Off";
+        }
+
+        // Función para encender el LED
+        function Servomotor_1_Change_Led_1_Status_To_True() {
+            Servomotor_1_Led_1_Status = true;
+            Servomotor_1_Led_2_Status = false;
+            Servomotor_1_Led_3_Status = false;
+            Servomotor_1_actualizarEstado();
+           // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
+        }
+
+        // Función para apagar el LED
+        function Servomotor_1_Change_Led_2_Status_To_True() {
+            Servomotor_1_Led_1_Status = false;
+            Servomotor_1_Led_2_Status = true;
+            Servomotor_1_Led_3_Status = false;
+            Servomotor_1_actualizarEstado();
+           // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
+        }
+
+        function Servomotor_1_Change_Led_3_Status_To_True() {
+            Servomotor_1_Led_1_Status = false;
+            Servomotor_1_Led_2_Status = false;
+            Servomotor_1_Led_3_Status = true;
+            Servomotor_1_actualizarEstado();
+           // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
+        }
+
+        // Llamar a la función de actualización al cargar la página
+        Servomotor_1_actualizarEstado();
+
+        //Transition
+        //Transition
+        //Transition
+        //Transition
+
+        // Logica Servomotor 2
+
+        let Servomotor_2_Led_1_Status = false;
+        let Servomotor_2_Led_2_Status = false;
+        let Servomotor_2_Led_3_Status = false;
+
+        // Función para actualizar el valor del campo de texto
+        function Servomotor_2_actualizarEstado() {
+            const estadoLedInput = document.getElementById("Servomotor_2_Estado_Led_1_Input");
+            estadoLedInput.value = Servomotor_2_Led_1_Status ? "On" : "Off";
+
+            const Estado_Led_2_Input = document.getElementById("Servomotor_2_Estado_Led_2_Input");
+            Estado_Led_2_Input.value = Servomotor_2_Led_2_Status ? "On" : "Off";
+
+            const Estado_Led_3_Input = document.getElementById("Servomotor_2_Estado_Led_3_Input");
+            Estado_Led_3_Input.value = Servomotor_2_Led_3_Status ? "On" : "Off";
+        }
+
+        // Función para encender el LED
+        function Servomotor_2_Change_Led_1_Status_To_True() {
+            Servomotor_2_Led_1_Status = true;
+            Servomotor_2_Led_2_Status = false;
+            Servomotor_2_Led_3_Status = false;
+            Servomotor_2_actualizarEstado();
+           // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
+        }
+
+        // Función para apagar el LED
+        function Servomotor_2_Change_Led_2_Status_To_True() {
+            Servomotor_2_Led_1_Status = false;
+            Servomotor_2_Led_2_Status = true;
+            Servomotor_2_Led_3_Status = false;
+            Servomotor_2_actualizarEstado();
+           // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
+        }
+
+        function Servomotor_2_Change_Led_3_Status_To_True() {
+            Servomotor_2_Led_1_Status = false;
+            Servomotor_2_Led_2_Status = false;
+            Servomotor_2_Led_3_Status = true;
+            Servomotor_2_actualizarEstado();
+           // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
+        }
+
+        // Llamar a la función de actualización al cargar la página
+        Servomotor_2_actualizarEstado();
+
+
+        //Transition
+        //Transition
+        //Transition
+        //Transition
+        
+        // Logica Servomotor 3
+
+        let Servomotor_3_Led_1_Status = false;
+        let Servomotor_3_Led_2_Status = false;
+        let Servomotor_3_Led_3_Status = false;
+
+        // Función para actualizar el valor del campo de texto
+        function Servomotor_3_actualizarEstado() {
+            const estadoLedInput = document.getElementById("Servomotor_3_Estado_Led_1_Input");
+            estadoLedInput.value = Servomotor_3_Led_1_Status ? "On" : "Off";
+
+            const Estado_Led_2_Input = document.getElementById("Servomotor_3_Estado_Led_2_Input");
+            Estado_Led_2_Input.value = Servomotor_3_Led_2_Status ? "On" : "Off";
+
+            const Estado_Led_3_Input = document.getElementById("Servomotor_3_Estado_Led_3_Input");
+            Estado_Led_3_Input.value = Servomotor_3_Led_3_Status ? "On" : "Off";
+        }
+
+        // Función para encender el LED
+        function Servomotor_3_Change_Led_1_Status_To_True() {
+            Servomotor_3_Led_1_Status = true;
+            Servomotor_3_Led_2_Status = false;
+            Servomotor_3_Led_3_Status = false;
+            Servomotor_3_actualizarEstado();
+           // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
+        }
+
+        // Función para apagar el LED
+        function Servomotor_3_Change_Led_2_Status_To_True() {
+            Servomotor_3_Led_1_Status = false;
+            Servomotor_3_Led_2_Status = true;
+            Servomotor_3_Led_3_Status = false;
+            Servomotor_3_actualizarEstado();
+           // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
+        }
+
+        function Servomotor_3_Change_Led_3_Status_To_True() {
+            Servomotor_3_Led_1_Status = false;
+            Servomotor_3_Led_2_Status = false;
+            Servomotor_3_Led_3_Status = true;
+            Servomotor_3_actualizarEstado();
+           // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
+        }
+
+        // Llamar a la función de actualización al cargar la página
+        Servomotor_3_actualizarEstado();
+    </script>
+
+</body>
+
+</html>
