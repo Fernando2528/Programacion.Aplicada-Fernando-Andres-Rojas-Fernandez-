@@ -90,18 +90,17 @@
         }
 
         // Función para encender el LED
-        function Servomotor_1_Change_Led_1_Status_To_True() {
-            Servomotor_1_Led_1_Status = true;
-            Servomotor_1_Led_2_Status = false;
-            Servomotor_1_Led_3_Status = false;
-            fetch('/?Servomotor_1_Led_1_Status=true');
-            then(response => {
+       function Servomotor_1_Change_Led_1_Status_To_True() {
+        Servomotor_1_Led_1_Status = true;
+        Servomotor_1_Led_2_Status = false;
+        Servomotor_1_Led_3_Status = false;
+        fetch('/?Servomotor_1_Led_1_Status=true')
+        .then(response => {
             console.log('LED encendido');
             Servomotor_1_actualizarEstado();
         })
         .catch(error => console.log('Error:', error));
-           // alert('El estado del LED es ' + (Led_1_Status ? "On" : "Off"));
-        }
+    }
 
         // Función para apagar el LED
         function Servomotor_1_Change_Led_2_Status_To_True() {
