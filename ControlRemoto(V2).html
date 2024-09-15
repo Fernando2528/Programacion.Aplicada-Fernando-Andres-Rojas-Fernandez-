@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Control Remoto De Servomotores</title>
+    <meta charset="UTF-8">
+
+    <style>
+        .marco {
+            border: 2px solid black; /* Línea de borde */
+            padding: 20px; /* Espacio interno */
+            width: 300px; /* Ancho del marco */
+            margin: 40px auto; /* Centra el marco en la página */
+        }
+
+        .contenedor {
+            display: flex; /* Usar Flexbox para colocar los elementos uno al lado del otro */
+            justify-content: space-around; /* Espacio entre los contenedores */
+        }
+
+       
+    </style>
+</head>
+
+<body>
+
+    <!-- Control Servomotor 1 -->
+    <div class="marco">
+        <p>Control Remoto Servomotor 1.</p>
+        <label for="s1">Ángulo: <span id="vs1">45</span>°</label>
+        <input type="range" id="s1" min="0" max="90" value="45" step="1" oninput="mostrarValor('s1', 'vs1')" style="display: block; margin-bottom: 10px;">
+    </div>
+
+    
+    <div class="marco">
+        <p>Control Remoto Servomotor 2.</p>
+        <label for="s2">Ángulo: <span id="vs2">45</span>°</label>
+        <input type="range" id="s2" min="0" max="90" value="45" step="1" oninput="mostrarValor('s2', 'vs2')" style="display: block; margin-bottom: 10px;">
+    </div>
+
+    <div class="marco">
+        <p>Control Remoto Servomotor 3.</p>
+        <label for="s3">Ángulo: <span id="vs3">45</span>°</label>
+        <input type="range" id="s3" min="0" max="90" value="45" step="1" oninput="mostrarValor('s3', 'vs3')" style="display: block; margin-bottom: 10px;">
+    </div>
+</div>
+
+    <script>
+
+         // Mostrar el valor del range slider
+         function mostrarValor(SliderID, SliderValue) {
+            const slider = document.getElementById(SliderID);
+            const valor = document.getElementById(SliderValue);
+            valor.textContent = slider.value;
+
+               // Enviar la información del slider al servidor Flask en la Raspberry Pi
+               fetch(`http://192.168.1.100:5000/servo1?angle=${slider.value}`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
