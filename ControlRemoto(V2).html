@@ -24,27 +24,28 @@
 
 <body>
 
-    <!-- Control Servomotor 1 -->
-    <div class="marco">
-        <p>Control Remoto Servomotor 1.</p>
-        <label for="s1">Ángulo: <span id="vs1">45</span>°</label>
-        <input type="range" id="s1" min="0" max="90" value="45" step="1" oninput="mostrarValor('s1', 'vs1')" style="display: block; margin-bottom: 10px;">
-    </div>
+    <div class="contenedor">
+        <!-- Control Servomotor 1 -->
+        <div class="marco">
+            <p>Control Remoto Servomotor 1.</p>
+            <label for="s1">Ángulo: <span id="vs1">45</span>°</label>
+            <input type="range" id="s1" min="0" max="90" value="45" step="1" oninput="mostrarValor('s1', 'vs1')" style="display: block; margin-bottom: 10px;">
+        </div>
 
-    
-    <div class="marco">
-        <p>Control Remoto Servomotor 2.</p>
-        <label for="s2">Ángulo: <span id="vs2">45</span>°</label>
-        <input type="range" id="s2" min="0" max="90" value="45" step="1" oninput="mostrarValor('s2', 'vs2')" style="display: block; margin-bottom: 10px;">
-    </div>
+        <!-- Control Servomotor 2 -->
+        <div class="marco">
+            <p>Control Remoto Servomotor 2.</p>
+            <label for="s2">Ángulo: <span id="vs2">45</span>°</label>
+            <input type="range" id="s2" min="0" max="90" value="45" step="1" oninput="mostrarValor('s2', 'vs2')" style="display: block; margin-bottom: 10px;">
+        </div>
 
-    <div class="marco">
-        <p>Control Remoto Servomotor 3.</p>
-        <label for="s3">Ángulo: <span id="vs3">45</span>°</label>
-        <input type="range" id="s3" min="0" max="90" value="45" step="1" oninput="mostrarValor('s3', 'vs3')" style="display: block; margin-bottom: 10px;">
+        <!-- Control Servomotor 3 -->
+        <div class="marco">
+            <p>Control Remoto Servomotor 3.</p>
+            <label for="s3">Ángulo: <span id="vs3">45</span>°</label>
+            <input type="range" id="s3" min="0" max="90" value="45" step="1" oninput="mostrarValor('s3', 'vs3')" style="display: block; margin-bottom: 10px;">
+        </div>
     </div>
-</div>
-
     <script>
 
          // Mostrar el valor del range slider
