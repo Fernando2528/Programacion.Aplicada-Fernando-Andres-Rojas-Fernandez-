@@ -56,7 +56,7 @@
             valor.textContent = slider.value;
 
                // Enviar la información del slider al servidor Flask en la Raspberry Pi
-               fetch(`http://192.168.1.100:5000/servo1?angle=${slider.value}`, {
+               fetch(`http://192.168.1.100:5000/${SliderID}?angle=${slider.value}`, {
                 method: 'GET'
             })
             .then(response => response.json())
