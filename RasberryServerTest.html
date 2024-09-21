@@ -7,14 +7,14 @@
 </head>
 <body>
     <h1>Control del LED</h1>
-    <button onclick="updateLED('on')">Encender LED</button>
-    <button onclick="updateLED('off')">Apagar LED</button>
+    <button onclick="updateLED('led_on')">Encender LED</button>
+    <button onclick="updateLED('led_off')">Apagar LED</button>
     <script>
-        const raspberryPiIp = 'http://192.168.43.196/api'; // Cambia esto por la IP de tu Raspberry Pi
+        const raspberryPiIp = 'http://192.168.43.196'; // Cambia esto por la IP de tu Raspberry Pi
 
         function updateLED(action) {
             const xhr = new XMLHttpRequest();
-            xhr.open("GET", `${raspberryPiIp}?action=${action}`, true);
+            xhr.open("GET", `${raspberryPiIp}/${action}`, true);
             xhr.send();
         }
     </script>
