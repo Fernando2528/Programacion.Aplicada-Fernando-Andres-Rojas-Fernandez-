@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control del LED</title>
 </head>
 <body>
-    <h1>Controlar LED desde GitHub Pages</h1>
-    <button onclick="controlLED('led_on')">Encender LED</button>
-    <button onclick="controlLED('led_off')">Apagar LED</button>
-
+    <h1>Control del LED</h1>
+    <button onclick="updateLED('on')">Encender LED</button>
+    <button onclick="updateLED('off')">Apagar LED</button>
     <script>
-        function controlLED(action) {
-            fetch(`http://192.168.43.196/${action}`)  // Asegúrate de usar la IP correcta de la Raspberry Pi Pico W
-                .then(response => response.text())
-                .then(data => alert(data))
-                .catch(error => console.error("Error:", error));
+        const raspberryPiIp = 'http://192.168.43.196/api'; // Cambia esto por la IP de tu Raspberry Pi
+
+        function updateLED(action) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `${raspberryPiIp}?action=${action}`, true);
+            xhr.send();
         }
     </script>
 </body>
