@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control del LED</title>
+</head>
+<body>
+    <h1>Controlar LED desde GitHub Pages</h1>
+    <button onclick="controlLED('led_on')">Encender LED</button>
+    <button onclick="controlLED('led_off')">Apagar LED</button>
+
+    <script>
+        function controlLED(action) {
+            fetch(`http://192.168.43.196/${action}`)  // Asegúrate de usar la IP correcta de la Raspberry Pi Pico W
+                .then(response => response.text())
+                .then(data => alert(data))
+                .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
