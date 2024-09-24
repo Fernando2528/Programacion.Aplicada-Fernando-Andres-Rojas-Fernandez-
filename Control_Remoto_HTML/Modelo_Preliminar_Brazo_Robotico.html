@@ -21,6 +21,14 @@
     </style>
 </head>
 <body>
+    <h1>Control de Servos</h1>
+
+    <script>
+        function updateServo(value, type) {
+            fetch('/move_' + type + '?angle=' + value);
+        }
+    </script>
+
     <script>
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -63,6 +71,7 @@
             requestAnimationFrame(animate);
             renderer.render(scene, camera);
         }
+
         animate();
 
         const controlContainer = document.createElement('div');
@@ -71,32 +80,35 @@
 
         const shoulderSlider = document.createElement('input');
         shoulderSlider.type = 'range';
-        shoulderSlider.min = -90;
+        shoulderSlider.min = 0; // Rango de 0 a 90
         shoulderSlider.max = 90;
         shoulderSlider.step = 1;
-        shoulderSlider.value = 0;
+        shoulderSlider.value = 0; // Inicial en 0 grados
         shoulderSlider.oninput = function() {
             const angle = parseFloat(this.value);
             shoulder.rotation.z = THREE.MathUtils.degToRad(-angle);
-            
+            updateServo(angle, 'hombro'); // Llama a updateServo
         };
-        controlContainer.appendChild(document.createTextNode('Hombro (-90 a 90°): '));
-        controlContainer.appendChild(shoulderSlider);
-
+        
         const elbowSlider = document.createElement('input');
         elbowSlider.type = 'range';
-        elbowSlider.min = 90;
-        elbowSlider.max = 180;  // Rango de 90 a 180
+        elbowSlider.min = 90; // Rango mínimo
+        elbowSlider.max = 180; // Rango máximo
         elbowSlider.step = 1;
-        elbowSlider.value = 90;  // Inicial en 90 grados
-        elbow.rotation.z = THREE.MathUtils.degToRad(90); // Cambiar la posición inicial del codo
+        elbowSlider.value = 0; // Inicial en 0 grados
+        elbow.rotation.z = THREE.MathUtils.degToRad(270); // Inicial en 0 grados
+
         elbowSlider.oninput = function() {
             const angle = parseFloat(this.value);
-            elbow.rotation.z = THREE.MathUtils.degToRad(angle);
-            
+            elbow.rotation.z = THREE.MathUtils.degToRad(-angle); // Actualiza la rotación del codo
+            updateServo(angle, 'codo'); // Envía el valor del ángulo al servidor
         };
+        
+        controlContainer.appendChild(document.createTextNode('Hombro (0 a 90°): '));
+        controlContainer.appendChild(shoulderSlider);
+        
         controlContainer.appendChild(document.createElement('br'));
-        controlContainer.appendChild(document.createTextNode('Codo (90-180°): '));
+        controlContainer.appendChild(document.createTextNode('Codo (0 a 90°): '));
         controlContainer.appendChild(elbowSlider);
     </script>
 </body>
