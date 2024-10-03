@@ -37,13 +37,13 @@
         document.body.appendChild(renderer.domElement);
         renderer.setClearColor(0x000000);
 
-        const base = new THREE.Mesh(new THREE.BoxGeometry(3, 0.5, 3), new THREE.MeshPhongMaterial({ color: 0x8B4513 }));
+        const base = new THREE.Mesh(new THREE.BoxGeometry(3, 0.5, 3), new THREE.MeshPhongMaterial({ color: 0xFFD700 }));
         base.position.y = -0.25;
         scene.add(base);
 
         const shoulder = new THREE.Group();
-        const armMaterial = new THREE.MeshPhongMaterial({ color: 0xF5DEB3 });
-        const elbowMaterial = new THREE.MeshPhongMaterial({ color: 0xADD8E6 });
+        const armMaterial = new THREE.MeshPhongMaterial({ color: 0xCD7F32 });
+        const elbowMaterial = new THREE.MeshPhongMaterial({ color: 0xC0C0C0 });
 
         const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 4, 32), armMaterial);
         arm.position.y = 2;
@@ -80,27 +80,25 @@
 
         const shoulderSlider = document.createElement('input');
         shoulderSlider.type = 'range';
-        shoulderSlider.min = 0; // Rango de 0 a 90
-        shoulderSlider.max = 180;
+        shoulderSlider.min = -90; // Rango de 0 a 90
+        shoulderSlider.max = 90;
         shoulderSlider.step = 1;
-        shoulderSlider.value = 0; // Inicial en 0 grados
-                
-        
-        
+        shoulderSlider.value = -90; // Inicial en 0 grados
+        shoulder.rotation.z = THREE.MathUtils.degToRad(90); // Inicial en 0 grados
+
         shoulderSlider.oninput = function() {
             const angle = parseFloat(this.value);
             shoulder.rotation.z = THREE.MathUtils.degToRad(-angle);
-            updateServo(angle, 'hombro'); // Llama a updateServo con el ángulo actual del slider
+            updateServo(angle, 'hombro'); // Llama a updateServo
         };
-
+        
         const elbowSlider = document.createElement('input');
         elbowSlider.type = 'range';
-        elbowSlider.min = 0; // Rango mínimo
+        elbowSlider.min = 90; // Rango mínimo
         elbowSlider.max = 180; // Rango máximo
         elbowSlider.step = 1;
         elbowSlider.value = 0; // Inicial en 0 grados
         elbow.rotation.z = THREE.MathUtils.degToRad(270); // Inicial en 0 grados
-        
 
         elbowSlider.oninput = function() {
             const angle = parseFloat(this.value);
