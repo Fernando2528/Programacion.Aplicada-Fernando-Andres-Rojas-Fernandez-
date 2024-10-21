@@ -18,100 +18,176 @@
             padding: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
+        h1 { color: white; text-align: center; }
     </style>
 </head>
 <body>
-    <h1>Control de Servos</h1>
+    <h1>Control de Servos del Brazo Robótico</h1>
 
     <script>
         function updateServo(value, type) {
-            fetch('/move_' + type + '?angle=' + value);
+            fetch('/move_' + type + '?angle=' + value)
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
         }
-    </script>
+        
+        class BrazoRobotico {
+            constructor(escena) {
+                this.hombro = new THREE.Group();
+                this.crearBase(escena);
+                this.crearBrazo();
+                escena.add(this.hombro);
+            }
 
-    <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-        renderer.setClearColor(0x000000);
+            crearBase(escena) {
+                const geometriaBase = new THREE.CylinderGeometry(3.5, 3.5, 0.5, 5);
+                const materialBase = new THREE.MeshStandardMaterial({
+                    color: 0xEAEAEA,
+                    metalness: 0.9,
+                    roughness: 0.1,
+                    emissive: 0x333333,
+                    emissiveIntensity: 0.3
+                });
+                const base = new THREE.Mesh(geometriaBase, materialBase);
+                base.position.y = -0.25;
+                escena.add(base);
+            }
 
-        const base = new THREE.Mesh(new THREE.BoxGeometry(3, 0.5, 3), new THREE.MeshPhongMaterial({ color: 0xFFD700 }));
-        base.position.y = -0.25;
-        scene.add(base);
+            crearBrazo() {
+                const textura = new THREE.TextureLoader().load('https://threejsfundamentals.org/threejs/resources/images/wall.jpg');
 
-        const shoulder = new THREE.Group();
-        const armMaterial = new THREE.MeshPhongMaterial({ color: 0xCD7F32 });
-        const elbowMaterial = new THREE.MeshPhongMaterial({ color: 0xC0C0C0 });
+                const materialBrazo = new THREE.MeshStandardMaterial({
+                    map: textura,
+                    metalness: 0.8,
+                    roughness: 0.3,
+                    emissive: 0xFF4500,
+                    emissiveIntensity: 0.6
+                });
 
-        const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 4, 32), armMaterial);
-        arm.position.y = 2;
-        shoulder.add(arm);
+                const materialCodo = new THREE.MeshStandardMaterial({
+                    color: 0x87CEEB,
+                    metalness: 0.9,
+                    roughness: 0.2,
+                    emissive: 0x4682B4,
+                    emissiveIntensity: 0.6
+                });
 
-        const elbow = new THREE.Mesh(new THREE.CylinderGeometry(0.75, 0.75, 1, 32), elbowMaterial);
-        elbow.position.set(0, 4, 0);
-        shoulder.add(elbow);
+                const materialMagneto = new THREE.MeshStandardMaterial({
+                    color: 0xEAEAEA,
+                    metalness: 0.7,
+                    roughness: 0.1,
+                    emissive: 0xFFFFFF,
+                    emissiveIntensity: 0.8
+                });
 
-        const forearm = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 4, 32), armMaterial);
-        forearm.position.set(0, 2, 0);
-        elbow.add(forearm);
+                // Brazo
+                const brazo = new THREE.Mesh(new THREE.BoxGeometry(1.3, 4, 1.3), materialBrazo);
+                brazo.position.y = 2;
+                this.hombro.add(brazo);
 
-        scene.add(shoulder);
-        camera.position.set(0, 5, 10);
-        camera.lookAt(0, 3, 0);
+                // Codo
+                const articulacionHombro = new THREE.Mesh(new THREE.SphereGeometry(0.80, 32, 32), materialCodo);
+                articulacionHombro.position.y = 4;
+                this.hombro.add(articulacionHombro);
 
-        const ambientLight = new THREE.AmbientLight(0x404040);
-        scene.add(ambientLight);
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        directionalLight.position.set(0, 10, 10);
-        scene.add(directionalLight);
+                const codo = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.5, 1.5), materialCodo);
+                codo.position.set(0, 4, 0);
+                this.hombro.add(codo);
 
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
+                const antebrazo = new THREE.Mesh(new THREE.BoxGeometry(0.8, 5, 0.8), materialBrazo);
+                antebrazo.position.set(0, 2.5, 0);
+                codo.add(antebrazo);
+
+                const geometriaMagneto = new THREE.DodecahedronGeometry(1);
+                const magneto = new THREE.Mesh(geometriaMagneto, materialMagneto);
+                magneto.position.set(0, 3.5, 0);
+                antebrazo.add(magneto);
+
+                this.brazo = brazo;
+                this.codo = codo;
+            }
+
+            rotarHombro(angulo) {
+                this.hombro.rotation.z = THREE.MathUtils.degToRad(-angulo);
+            }
+
+            rotarCodo(angulo) {
+                this.codo.rotation.z = THREE.MathUtils.degToRad(-angulo);
+            }
         }
 
-        animate();
+        const escena = new THREE.Scene();
+        const camara = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderizador = new THREE.WebGLRenderer({ antialias: true });
+        renderizador.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderizador.domElement);
+        renderizador.setClearColor(0x000000);
 
-        const controlContainer = document.createElement('div');
-        controlContainer.className = 'controls';
-        document.body.appendChild(controlContainer);
+        const brazo = new BrazoRobotico(escena);
 
-        const shoulderSlider = document.createElement('input');
-        shoulderSlider.type = 'range';
-        shoulderSlider.min = -90; // Rango de 0 a 90
-        shoulderSlider.max = 90;
-        shoulderSlider.step = 1;
-        shoulderSlider.value = -90; // Inicial en 0 grados
-        shoulder.rotation.z = THREE.MathUtils.degToRad(90); // Inicial en 0 grados
+        camara.position.set(0, 5, 10);
+        camara.lookAt(0, 3, 0);
 
-        shoulderSlider.oninput = function() {
-            const angle = parseFloat(this.value);
-            shoulder.rotation.z = THREE.MathUtils.degToRad(-angle);
-            updateServo(angle, 'hombro'); // Llama a updateServo
+        const luzAmbiente = new THREE.AmbientLight(0x404040, 2);
+        escena.add(luzAmbiente);
+
+        const luzPuntual = new THREE.PointLight(0xFFFFFF, 2);
+        luzPuntual.position.set(10, 10, 10);
+        escena.add(luzPuntual);
+
+        function animar() {
+            requestAnimationFrame(animar);
+            renderizador.render(escena, camara);
+        }
+        animar();
+
+        // Crear controles de sliders
+        const contenedorControles = document.createElement('div');
+        contenedorControles.className = 'controls';
+        document.body.appendChild(contenedorControles);
+
+        const deslizadorHombro = document.createElement('input');
+        deslizadorHombro.type = 'range';
+        deslizadorHombro.min = -90;
+        deslizadorHombro.max = 90;
+        deslizadorHombro.step = 1;
+        deslizadorHombro.value = 0;  // Ángulo inicial del hombro
+
+        deslizadorHombro.oninput = function () {
+            const angulo = parseFloat(this.value);
+            brazo.rotarHombro(angulo);
+            updateServo(angulo, 'hombro');
         };
-        
-        const elbowSlider = document.createElement('input');
-        elbowSlider.type = 'range';
-        elbowSlider.min = 90; // Rango mínimo
-        elbowSlider.max = 180; // Rango máximo
-        elbowSlider.step = 1;
-        elbowSlider.value = 0; // Inicial en 0 grados
-        elbow.rotation.z = THREE.MathUtils.degToRad(270); // Inicial en 0 grados
 
-        elbowSlider.oninput = function() {
-            const angle = parseFloat(this.value);
-            elbow.rotation.z = THREE.MathUtils.degToRad(-angle); // Actualiza la rotación del codo
-            updateServo(angle, 'codo'); // Envía el valor del ángulo al servidor
+        const deslizadorCodo = document.createElement('input');
+        deslizadorCodo.type = 'range';
+        deslizadorCodo.min = 0;
+        deslizadorCodo.max = 90;
+        deslizadorCodo.step = 1;
+        deslizadorCodo.value = 0;  // Ángulo inicial del codo
+
+        deslizadorCodo.oninput = function () {
+            const angulo = 180 - parseFloat(this.value);  // Invertir el ángulo (0 se convierte en 180 y 180 en 0)
+            brazo.rotarCodo(angulo);
+            updateServo(angulo, 'codo');
         };
-        
-        controlContainer.appendChild(document.createTextNode('Hombro (0 a 180°): '));
-        controlContainer.appendChild(shoulderSlider);
-        
-        controlContainer.appendChild(document.createElement('br'));
-        controlContainer.appendChild(document.createTextNode('Codo (0 a 180°): '));
-        controlContainer.appendChild(elbowSlider);
+
+        const etiquetaHombro = document.createElement('label');
+        etiquetaHombro.innerText = 'Hombro: ';
+        const etiquetaCodo = document.createElement('label');
+        etiquetaCodo.innerText = 'Codo: ';
+
+        contenedorControles.appendChild(etiquetaHombro);
+        contenedorControles.appendChild(deslizadorHombro);
+        contenedorControles.appendChild(document.createElement('br'));
+        contenedorControles.appendChild(etiquetaCodo);
+        contenedorControles.appendChild(deslizadorCodo);
+
+        // Rotación inicial del brazo y codo
+        brazo.rotarHombro(0);  // Ángulo inicial de 45 grados para el hombro
+        brazo.rotarCodo(90);   // Ángulo inicial de 120 grados para el codo
     </script>
 </body>
 </html>
+
