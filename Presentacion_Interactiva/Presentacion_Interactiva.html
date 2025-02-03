@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe del Proyecto: Brazo y Aplicación</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #121212;
+      color: #E0E0E0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #1E1E1E;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #E0E0E0;
+    }
+    /* Estilos para los botones colapsables */
+    .collapsible {
+      background-color: #1E88E5;
+      color: white;
+      cursor: pointer;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      font-size: 16px;
+      margin: 5px 0;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .active, .collapsible:hover {
+      background-color: #64B5F6;
+    }
+    .content {
+      padding: 10px;
+      display: none;
+      background-color: #252525;
+      border-left: 4px solid #1E88E5;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .content p, .content ul {
+      padding: 10px 0;
+    }
+    .content img {
+      max-width: 100%;
+      height: auto;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    .content a {
+      color: #64B5F6;
+      text-decoration: none;
+    }
+    .content a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Informe del Proyecto: Brazo y Aplicación</h1>
+
+    <!-- Introducción -->
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        <style>
+          /* Aplicamos la nueva fuente */
+          body {
+            font-family: 'Poppins', sans-serif;
+          }
+          /* Sección de la introducción */
+          .content {
+            padding: 15px;
+            background-color: #252525;
+            border-left: 4px solid #1E88E5;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: justify;
+            line-height: 1.6;
+            font-size: 16px;
+            max-width: 800px;
+          }
+          .content p {
+            margin: 10px 0;
+          }
+          .content strong {
+            color: #64B5F6;
+          }
+        </style>
+      </head>
+      <body>
+      
+        <button class="collapsible">Introducción</button>
+        <div class="content">
+          <p>
+            En la actualidad, la <strong>automatización</strong> y la <strong>robótica</strong> juegan un papel fundamental en la optimización de procesos industriales y de clasificación. Este proyecto desarrolla un <strong>brazo robótico inteligente</strong> capaz de identificar y organizar objetos en función de su color, utilizando <em>visión artificial</em> y algoritmos de movimiento avanzados.
+          </p>
+          <p>
+            El sistema cuenta con una <strong>cámara</strong> que detecta la presencia de objetos con <strong>LEDs de colores rojo, azul y verde</strong>. Mediante <em>procesamiento de imágenes</em>, se determinan las coordenadas exactas de cada objeto y se envían al brazo robótico. A partir de esta información, el brazo ejecuta una secuencia de movimientos precisos para <strong>recoger el objeto</strong> y depositarlo en su contenedor correspondiente.
+          </p>
+          <p>
+            Para garantizar trayectorias <strong>suaves y eficientes</strong>, el desplazamiento del brazo se basa en <em>curvas de Bézier</em>, lo que permite optimizar los movimientos y minimizar errores en la manipulación de los objetos. Este enfoque no solo mejora la <strong>precisión</strong> del sistema, sino que también contribuye a una <strong>mayor eficiencia energética</strong> y un menor desgaste mecánico.
+          </p>
+          <p>
+            El desarrollo de este proyecto no solo representa una <strong>solución innovadora</strong> para la clasificación automatizada en entornos industriales, sino que también sienta las bases para futuras implementaciones en <strong>sistemas de logística, manufactura y recolección autónoma de objetos</strong>.
+          </p>
+        </div>
+      
+      </body>
+      
+
+    <!-- Materiales Utilizados -->
+    <button class="collapsible">Materiales Utilizados</button>
+<div class="content">
+  <p>Selecciona un material para ver su descripción e imagen:</p>
+
+  <!-- Material: Brazo Robótico -->
+  <button class="sub-collapsible">Brazo Robótico</button>
+  <div class="sub-content">
+    <p>La version basica del brazo consiste dos segementos solidos conectados a dos servomotores de 180 grados que permiten la movilidad del "Hombro" y el "Codo".</p>
+    <img src="file:///C:/Users/ferna/OneDrive/Imágenes/Imagenes%20Programacion/Imagen_(Brazo_Version_Basica).png" alt="Imagen de programación">
+  </div>
+
+  <!-- Material: Cámara de Visión -->
+  <button class="sub-collapsible">Cámara de Visión</button>
+  <div class="sub-content">
+    <p>La cámara se encarga de detectar los colores de los objetos y enviar sus coordenadas al sistema.</p>
+    <img src="file:///C:/Users/ferna/OneDrive/Imágenes/Imagenes%20Programacion/Imagen_Preliminar_Camara.jpg" alt="Cámara de Visión" width="100%">
+  </div>
+
+  <!-- Material: Controlador Electrónico -->
+  <button class="sub-collapsible">Controlador Electrónico</button>
+  <div class="sub-content">
+    <p>El controlador coordina los movimientos del brazo y procesa la información de la cámara.</p>
+    <img src="file:///C:/Users/ferna/OneDrive/Imágenes/Imagenes%20Programacion/Imagen2_(Rasberry_Pi_Pico_W).png" alt="Controlador" width="100%">
+  </div>
+
+  <!-- Material: Electroiman -->
+  <button class="sub-collapsible">Electroimán</button>
+  <div class="sub-content">
+    <p>El electroimán es util para atraer objetos ferromagneticos, acoplarlos, trasladarlos y desacoplarlos segun lo requiera el contexto</p>
+    <img src="file:///C:/Users/ferna/OneDrive/Imágenes/Imagenes%20Programacion/Imagen2_(Rasberry_Pi_Pico_W).png" alt="Electroiman" width="100%">
+  </div>
+
+   <!-- Material: Pinza -->
+   <button class="sub-collapsible">Pinza</button>
+   <div class="sub-content">
+     <p>La pinza permite trasladar objetos que no sean demasiodo lisos ni demasiado pesados de un situo a otro mediante un servomotor particular propio</p>
+     <img src="file:///C:/Users/ferna/OneDrive/Imágenes/Imagenes%20Programacion/Imagen_Preliminar_Pinza.png" alt="Electroiman" width="100%">
+   </div>
+
+</div>
+
+<style>
+  /* Estilos para botones colapsables */
+  .sub-collapsible {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    margin-top: 5px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  .sub-collapsible:hover {
+    background-color: #444;
+  }
+  /* Estilos para contenido colapsable */
+  .sub-content {
+    padding: 10px;
+    display: none;
+    background-color: #252525;
+    border-left: 3px solid #1E88E5;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+  .sub-content p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  /* Estilo para imágenes */
+  .sub-content img {
+    max-width: 80%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+  }
+</style>
+
+
+    <!-- Manual de Funcionamiento -->
+    <button class="collapsible">Manual de Funcionamiento</button>
+<div class="content">
+  <p>Selecciona una función para ver su descripción y recursos:</p>
+
+  <!-- Control Remoto -->
+<button class="sub-collapsible">Control Remoto</button>
+<div class="sub-content">
+  <p>El control remoto permite operar el brazo robótico a distancia a través de una interfaz intuitiva. 
+  Para ello, se emplean <strong>sliders de rango</strong> que ajustan el ángulo de los servomotores en tiempo real. 
+  Además, se implementan <strong>curvas de Bézier</strong> para garantizar movimientos suaves y precisos al trasladarse al ángulo deseado.</p>
+  <p>Al ejecutar el control remoto, el programa generará una dirección IP. Al acceder a esta dirección, se mostrará una interfaz con dos <strong>range sliders</strong> uno etiquetado como 'servo 1' y otro como 'servo 2'. Al ajustar estos controles, el programa, ejecutado localmente en Python, recibirá el ángulo especificado por el html y calculará una trayectoria mediante curvas de Bézier. Posteriormente, enviará de manera progresiva los valores a los servomotores, garantizando un movimiento suave y preciso.</p>
+
+  <a href="https://github.com/Fernando2528/Programacion.Aplicada-Fernando-Andres-Rojas-Fernandez-/blob/main/Curvas_De_Bezier_Control_Remoto/CurvaBezierControlRemoto.py" target="_blank">Acceso al control remoto</a>
+
+  <br><br>
+  
+  <img src="file:///C:/Users/ferna/OneDrive/Imágenes/Imagenes%20Programacion/Ilustracion_Gemelo_Virtual.png" alt="Electroiman" width="100%">
+
+</div>
+
+
+  <!-- Gemelo Virtual -->
+  <button class="sub-collapsible">Gemelo Virtual</button>
+  <div class="sub-content">
+    <p><strong>El gemelo virtual</strong> es una representación digital en tiempo real del brazo robótico físico. Este sistema simula el comportamiento y los movimientos del brazo real, permitiendo su monitoreo y control remoto desde una interfaz visual.</p>
+
+  <p>Equipado con servomotores y un <strong>electroimán</strong>, el gemelo virtual replica cada movimiento del brazo físico, proporcionando una retroalimentación precisa.</p>
+
+    <p>Además, actúa como una herramienta de <strong>control remoto</strong>: al enviar instrucciones al gemelo virtual, el brazo real replica exactamente esos movimientos. Este enfoque facilita la programación, supervisión y ajuste de las operaciones del brazo robótico, optimizando la interacción con el sistema en situaciones complejas.</p>
+    <p>Al ejecutar el gemelo virtual, el programa generará una dirección IP. Al acceder a esta dirección, se mostrará la representación gráfica del gemelo, cuya interfaz incluye dos <strong>Range Sliders</strong>: uno etiquetado como 'Hombro' y otro como 'Codo'. Al ajustar estos <strong>sliders</strong>, se enviará al microcontrolador el ángulo correspondiente para su emulación, adicionalmente el programa codificado en python.</p>
+    <a href="https://github.com/Fernando2528/Programacion.Aplicada-Fernando-Andres-Rojas-Fernandez-/blob/main/Gemelo_Virtual_HTML/Actualizacion_Final_Preliminar_HTML_Brazo.html" target="_blank">Explorar el Gemelo Virtual</a>
+
+    <br><br>
+    <img src="file:///C:/Users/ferna/OneDrive/Imágenes/Imagenes%20Programacion/Ilustracion_(Control_Remoto_Curvas_De_Bezier).png" alt="Electroiman" width="100%">
+  </div>
+
+  <!-- Videos de Funcionamiento -->
+
+  <button class="sub-collapsible">Video de Funcionamiento</button>
+    <div class="sub-content">
+      <p>Visualiza el video de presentación del proyecto:</p>
+      <iframe width="560" height="315" 
+      src="https://www.youtube.com/embed/mAj0yOh7xC8" 
+      frameborder="0" 
+      allowfullscreen>
+      </iframe>
+
+    </div>
+
+</div>
+
+        <style>
+        /* Estilos para las sub-secciones */
+        .sub-collapsible {
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            font-size: 14px;
+            margin-top: 5px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .sub-collapsible:hover {
+            background-color: #444;
+        }
+        .sub-content {
+            padding: 10px;
+            display: none;
+            background-color: #252525;
+            border-left: 3px solid #1E88E5;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .sub-content a {
+            color: #64B5F6;
+            text-decoration: none;
+        }
+        .sub-content a:hover {
+            text-decoration: underline;
+        }
+        </style>
+
+        <script>
+        const subCollapsibles = document.getElementsByClassName("sub-collapsible");
+        for (let i = 0; i < subCollapsibles.length; i++) {
+            subCollapsibles[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            const content = this.nextElementSibling;
+            content.style.display = content.style.display === "block" ? "none" : "block";
+            });
+        }
+        </script>
+
+
+    <!-- Diagrama de Bloques del Código -->
+    <button class="collapsible">Diagrama de Bloques del Código</button>
+    <div class="content">
+      <p>Haz clic en cada sub-bloque para ver el código correspondiente:</p>
+      <ul>
+        <li><a href="https://1drv.ms/i/c/5c05a26c71a4ea12/EQCnjPqBBVRChKmOHo9MxhYBzTOkfGNh1JBc-dPbrzqtMA?e=nXnnkN" target="_blank">Brazo y Servos</a></li>
+        <li><a href="https://1drv.ms/i/c/5c05a26c71a4ea12/EbAlievxUxlIuZsp7rfYkzIBSS7hAXmSuyZpk8EJ1Bl7jg?e=VxNjaL" target="_blank">OLED</a></li>
+        <li><a href="https://1drv.ms/i/c/5c05a26c71a4ea12/EQ0ucKzBZNxDmM5oMUeE4vcBDzEKgYbTIOWAtM6wziDxbA?e=dX9EBv" target="_blank">Gemelo Virtual</a></li>
+        <li><a href="https://1drv.ms/i/c/5c05a26c71a4ea12/EVG0S6c18K5ElKhy_0TFhKEBtgcCQI8rAx5-4vG75mcE_g?e=kYMgbL" target="_blank">Sincronización</a></li>
+        <li><a href="https://1drv.ms/i/c/5c05a26c71a4ea12/EYTSwqm4HrBMiU1JegQ7YgIBKKpYsjFEziAeFZ39LoUDWQ?e=PnOI20" target="_blank">Control Remoto</a></li>
+      </ul>
+    </div>
+
+    <!-- Mejoras para Realizar -->
+    <button class="collapsible">Mejoras para Realizar</button>
+    <div class="content">
+      <p>Lista de mejoras y propuestas a implementar en futuras versiones del proyecto:</p>
+      <ul>
+        <li><strong>Implementación De Controladores Adicionales:</strong>  
+          Actualmente, el sistema de visión del brazo robótico se encuentra limitado por la capacidad de procesamiento del hardware utilizado. Se propone la integración de controladores más avanzados, como Raspberry Pi o Jetson Nano, que permitan un procesamiento de imágenes de mayor calidad. Esta mejora facilitaría una detección más precisa de estímulos en el entorno, optimizando la identificación y manipulación de objetos mediante algoritmos de visión artificial. Adicionalmente, la implementación de modelos de redes neuronales especializadas podría mejorar la clasificación y reconocimiento de objetos, ampliando las capacidades del sistema en aplicaciones industriales, médicas o logísticas.  
+          </li>
+          
+          <br><br>
+          
+          <li><strong>Aumento de la potencia y por ende de las posibilidades del brazo:</strong>  
+          El brazo robótico presenta limitaciones en cuanto a la carga útil que puede manipular debido a la potencia de sus servomotores actuales. Se propone la incorporación de fuentes de alimentación externas con mayor capacidad, lo que permitirá el uso de servomotores de mayor potencia y torque. Esta mejora no solo incrementaría el peso máximo que el brazo puede manejar, sino que también permitiría ampliar su rango de aplicaciones a tareas más exigentes. Asimismo, este principio puede aplicarse a la implementación de un electroimán de mayor capacidad, posibilitando la manipulación eficiente de objetos metálicos en procesos automatizados.  
+          
+          Estas mejoras contribuirían significativamente a la eficiencia y versatilidad del brazo robótico, permitiendo su aplicación en entornos más exigentes y optimizando su rendimiento en tareas de precisión y manipulación de cargas.  
+          </li>
+          
+        
+      </ul>
+    </div>
+
+    <!-- Video de Presentación -->
+    <button class="collapsible">Video de Presentación</button>
+    <div class="content">
+      <p>Visualiza el video de presentación del proyecto:</p>
+      <iframe width="560" height="315" 
+      src="https://www.youtube.com/embed/Gzrq-kBYYJU" 
+      frameborder="0" 
+      allowfullscreen>
+      </iframe>
+
+    </div>
+
+  </div>
+
+  <!-- Script para el comportamiento de las secciones colapsables -->
+  <script>
+    const coll = document.getElementsByClassName("collapsible");
+    for (let i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        const content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+  </script>
+</body>
+</html>
